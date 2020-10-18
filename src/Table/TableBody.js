@@ -56,8 +56,8 @@ export default {
       const eventType = $event ? $event.type : '';
       const { row, rowIndex, column, columnIndex } = data;
       const latestData = this.table.bodyData;
-      // Checkbox
-      if (certainType.checkbox) {
+      // Radio or Checkbox or Row Selected
+      if ((certainType.row || certainType.checkbox) && others.clickRow) {
         const { isChecked } = others;
         this.toggleStatus('Checked', row, rowIndex, isChecked);
         if (row._childrenLen > 0) {
@@ -67,9 +67,7 @@ export default {
           }
         }
         return this.table.$emit('checkbox-click', latestData[rowIndex], column, columnIndex, $event);
-      }
-      // Radio
-      if (certainType.radio) {
+      } else if ((certainType.row || certainType.radio) && others.clickRow) {
         this.radioSelectedIndex = rowIndex;
         return this.table.$emit('radio-click', { row, rowIndex, column, columnIndex, $event });
       }
@@ -98,10 +96,6 @@ export default {
           ...target,
           _isHover: hover,
         });
-      }
-      if (certainType.row && others.clickRow) {
-        this.radioSelectedIndex = rowIndex;
-        return this.table.$emit('radio-click', { row, rowIndex, column, columnIndex, $event });
       }
       if (certainType.cell) {
         return this.table.$emit(`${type}-${eventType}`, latestData[rowIndex], rowIndex, column, columnIndex, $event);
@@ -275,7 +269,7 @@ export default {
                   style={ getStyle.call(this, 'row', row, rowIndex) }
                   class={ getClassName.call(this, 'row', row, rowIndex) }
                   on-click={ $event => this.handleEvent($event, 'row', { row, rowIndex }, { clickRow: true }) }
-                  on-dblclick={ $event => this.handleEvent($event, 'row', { row, rowIndex }) }
+                  on-dblclick={ $event => this.handleEvent($event, 'row', { row, rowIndex }, { clickRow: true }) }
                   on-contextmenu={ $event => this.handleEvent($event, 'row', { row, rowIndex }) }
                   on-mouseenter={ $event => this.handleEvent($event, 'row', { row, rowIndex }, { hover: true }) }
                   on-mouseleave={ $event => this.handleEvent($event, 'row', { row, rowIndex }, { hover: false }) }>
@@ -283,8 +277,8 @@ export default {
                       <td
                         style={ getStyle.call(this, 'cell', row, rowIndex, column, columnIndex) }
                         class={ getClassName.call(this, 'cell', row, rowIndex, column, columnIndex) }
-                        on-click={ $event => this.handleEvent($event, 'cell', { row, rowIndex, column, columnIndex }) }
-                        on-dblclick={ $event => this.handleEvent($event, 'cell', { row, rowIndex, column, columnIndex }) }
+                        on-click={ $event => this.handleEvent($event, 'cell', { row, rowIndex, column, columnIndex }, { clickRow: false }) }
+                        on-dblclick={ $event => this.handleEvent($event, 'cell', { row, rowIndex, column, columnIndex }, { clickRow: false }) }
                         on-contextmenu={ $event => this.handleEvent($event, 'cell', { row, rowIndex, column, columnIndex }) }
                         on-mouseenter={ $event => this.handleEvent($event, 'cell', { row, rowIndex, column, columnIndex }) }
                         on-mouseleave={ $event => this.handleEvent($event, 'cell', { row, rowIndex, column, columnIndex }) }>
