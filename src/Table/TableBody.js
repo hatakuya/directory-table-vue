@@ -58,12 +58,15 @@ export default {
       const latestData = this.table.bodyData;
       // Radio or Checkbox or Row Selected
       if ((certainType.row || certainType.checkbox) && others.clickRow) {
-        const { isChecked } = others;
-        this.toggleStatus('Checked', row, rowIndex, isChecked);
+        // fixed the status (if undefined, reverse the status in toggleStatus function)
+        const checkStatus = !row._isChecked;
+        console.log(checkStatus);// eslint-disable-line
+        this.toggleStatus('Checked', row, rowIndex, checkStatus);
         if (row._childrenLen > 0) {
+          // handling checkbox status [true or false]
           const childrenIndex = this.getChildrenIndex(row._level, rowIndex, false);
           for (let i = 0; i < childrenIndex.length; i++) {
-            this.toggleStatus('Checked', latestData[childrenIndex[i]], childrenIndex[i], isChecked);
+            this.toggleStatus('Checked', latestData[childrenIndex[i]], childrenIndex[i], checkStatus);
           }
         }
         return this.table.$emit('checkbox-click', latestData[rowIndex], column, columnIndex, $event);
