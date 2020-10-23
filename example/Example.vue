@@ -19,7 +19,7 @@
       :show-row-hover="props.showRowHover"
       :show-index="props.showIndex"
       :tree-type="props.treeType"
-      select-type="radio"
+      select-type="checkbox"
       :is-fold="props.isFold"
       :expand-type="props.expandType"
       expand-key="sex"
@@ -39,6 +39,7 @@
         <button>123</button>
       </template>
     </tree-table>
+    <div><button @click="getCheckedIndexes">取得</button> {{checkedIndexs}}</div>
   </div>
 </template>
 
@@ -52,6 +53,7 @@
     },
     data() {
       return {
+        checkedIndexs: [],
         props: {
           stripe: false,
           border: false,
@@ -70,6 +72,7 @@
             sex: 'male',
             likes: ['football', 'basketball'],
             score: 10,
+            _isChecked: true,
             children: [
               {
                 name: 'Ashley',
@@ -82,18 +85,21 @@
                     sex: 'female',
                     likes: ['football', 'basketball'],
                     score: 20,
+                    _isChecked: true,
                   },
                   {
                     name: 'Taki',
                     sex: 'male',
                     likes: ['football', 'basketball'],
                     score: 10,
+                    _isChecked: true,
                     children: [
                       {
                         name: 'Ashley',
                         sex: 'female',
                         likes: ['football', 'basketball'],
                         score: 20,
+                        _isChecked: true,
                       },
                       {
                         name: 'Taki',
@@ -237,6 +243,9 @@
     methods: {
       handleRadioClick(option) {
         console.log(option); // eslint-disable-line
+      },
+      getCheckedIndexes() {
+        this.checkedIndexs = this.$refs.table.getCheckedProp();
       },
     },
   };

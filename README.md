@@ -1,56 +1,54 @@
 # tree-table-vue
 
-> A table(with tree-grid) component development based on vue-table-with-tree-grid [@MisterTaki](https://github.com/MisterTaki/vue-table-with-tree-grid))
-
-> **在vue-table-with-tree-grid v0.2.4版本基础上，修复了vue新版本对重复key检测造成的警告**
-
-> **添加了自定义显示展开子级按钮的属性expand-key**
-
-**注意：v1.0.7版本开始，修改了columns的prop属性为key，label属性为title，修改selection-type为selectable，添加了select-type属性**
-
-#### 作者系列视频课程：
-
-[Vue技术栈开发实战(26课时)](https://segmentfault.com/ls/1650000016221751?utm_source=recommend_web-live-new)
-
-[TypeScript完全解读(26课时)](https://segmentfault.com/ls/1650000018455856?utm_source=recommend_web-live-new)
-
-## Example
-
-![Example](./example/example.gif)
+* A table(with tree-grid) component development
+  * based on
+    * tree-table-vue [@lison16](https://github.com/lison16/tree-table-vue))
+    * vue-table-with-tree-grid [@MisterTaki](https://github.com/MisterTaki/vue-table-with-tree-grid))
 
 ## Installation
 
 Use npm:
 
 ```shell
-npm i tree-table-vue -S
+npm i directory-table-vue -S
 ```
 
 Or use yarn:
 
 ```shell
-yarn add tree-table-vue
+yarn add directory-table-vue
 ```
 
 ## Usage
 
 ```javascript
 import Vue from 'vue'
-import TreeTable from 'tree-table-vue'
+import DirectoryTable from 'directory-table-vue'
 
-Vue.use(TreeTable)
+Vue.use(DirectoryTable)
 ```
 
 Or
 
 ```javascript
 import Vue from 'vue'
-import TreeTable from 'tree-table-vue'
+import DirectoryTable from 'directory-table-vue'
 
-Vue.component(TreeTable.name, TreeTable)
+Vue.component(DirectoryTable.name, DirectoryTable)
 ```
 
+The following is currently being fixed
+
+
+
+
 more information please see [example...](https://github.com/MisterTaki/vue-table-with-tree-gird/blob/master/example/Example.vue), or git clone this repository and open dev mode (I will give it a homepage later...).
+
+
+
+## Example
+
+![Example](./example/example.gif)
 
 ## API
 
