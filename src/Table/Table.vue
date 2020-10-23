@@ -48,10 +48,14 @@
     data.forEach((row, index) => {
       const children = row[childrenProp];
       const childrenLen = Object.prototype.toString.call(children).slice(8, -1) === 'Array' ? children.length : 0;
+      let checkStatus = false;
+      if ('_isChecked' in row) {
+        checkStatus = row._isChecked;
+      }
       bodyData.push({
         _isHover: false,
         _isExpanded: false,
-        _isChecked: false,
+        _isChecked: checkStatus,
         _level: level,
         _isHide: isFold ? level !== 1 : false,
         _isFold: isFold,
